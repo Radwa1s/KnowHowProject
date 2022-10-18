@@ -2,15 +2,17 @@ import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase";
-import Loader from "../components/loader";
+import { auth } from "../../firebase";
+import Loader from "../../components/loader";
 import { Link, useNavigate } from "react-router-dom";
-import "./css.css";
-import { GoogleAuthProvider } from "firebase/auth";
+import "../css.css";
+import { GoogleAuthProvider, updateProfile } from "firebase/auth";
 import { signInWithPopup } from "firebase/auth";
 
 const Register = () => {
   const [email, setEmail] = useState("");
+  const [userName, setUserName] = useState("");
+
   const [password, setPassword] = useState("");
   const [cpassword, setCPassword] = useState("");
   const [isLoading, setIsLoading] = useState("");
@@ -23,13 +25,19 @@ const Register = () => {
     }
     setIsLoading(true);
 
+    console.log(auth, email, password, userName);
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
+        const user = auth.currentUser;
+        updateProfile(user, {
+          displayName: userName,
+        });
         // const user = userCredential.user;
         // console.log(user);
         setIsLoading(false);
         toast.success("done.");
-        navigate("/login");
+        navigate("/profile");
+        window.location.reload();
       })
       .catch((error) => {
         toast.error(error.message);
@@ -61,6 +69,14 @@ const Register = () => {
           onChange={(e) => setEmail(e.target.value)}
           required
         />
+        <input
+          placeholder="userName"
+          type="text"
+          value={userName}
+          onChange={(e) => setUserName(e.target.value)}
+          required
+        />
+
         <input
           placeholder="Password"
           type="password"

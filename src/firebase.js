@@ -3,6 +3,7 @@ import "firebase/auth";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
+import { collection } from "firebase/firestore";
 const firebaseConfig = {
   apiKey: "AIzaSyALj66NqGsiM7V1Pzg_PoAjjjtqSeRVM2g",
   authDomain: "knowhowproject-669b3.firebaseapp.com",
@@ -14,8 +15,10 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 export const storage = getStorage(app);
+export const colRef = collection(db, "PostList");
 
 export default app;
