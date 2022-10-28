@@ -11,17 +11,26 @@ import { ShowOnLogout } from "../components/hiddenLinks/hiddenLinks";
 import { useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import CreatePost from "./Posts/createPost";
+// import "flowbite";
+// import "flowbite-react";
+
+import imgRig from "./Group 5.png";
+
+import logo from "./Group.png";
 export default function Navbar() {
   const [displayName, setDisplayName] = useState("");
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [email, setDisplayEmail] = useState("");
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log(user);
+        // console.log(user);
 
         setDisplayName(user.displayName);
+        setDisplayEmail(user.email);
 
         dispatch(
           SET_ACTIVE_USER({
@@ -47,24 +56,79 @@ export default function Navbar() {
         toast.error(error.massage);
       });
   };
+  const toggleDropdown = () => {
+    isDropdownOpen ? setIsDropdownOpen(false) : setIsDropdownOpen(true);
+  };
   return (
-    <div>
-      <Link to="/"> Know-How</Link>
-      <ShowOnLogout>
-        <Link to="/Register">Register</Link>
-        <Link to="/login">Login</Link>
-        {/* <Link to="/Posts">
-          <button>Create Post</button>
-        </Link> */}
-      </ShowOnLogout>
+    <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
+      <div className="container flex flex-wrap justify-between items-center mx-auto">
+        <Link to="/">
+          <img src={logo} />
+        </Link>
+        <ShowOnLogout>
+          <div>
+            <Link to="/login">
+              {" "}
+              <button
+                type="button"
+                className="text-black font-inter bg-white  focus:ring-1 focus:ring-lightGreen font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2   focus:outline-none "
+              >
+                Login
+              </button>
+            </Link>
+            <Link to="/Register">
+              <button
+                type="button"
+                className="text-black font-inter bg-lightGreen hover:bg-lightGreen focus:ring-1 focus:ring-lightGreen font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:lightGreen dark:hover:lightGreen focus:outline-none dark:focus:lightGreen"
+              >
+                Sign up
+              </button>
+            </Link>
+          </div>
+        </ShowOnLogout>
 
-      <ShowOnLogin>
-        <Link to="/profile">{displayName}</Link>
+        <ShowOnLogin>
+          <button
+            onClick={toggleDropdown}
+            id="dropdownUserAvatarButton"
+            data-dropdown-toggle="dropdownAvatar"
+            className="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 "
+            type="button"
+          >
+            <span className="sr-only">Open user menu</span>
+            <img
+              className="w-8 h-8 rounded-full"
+              src={imgRig}
+              alt="user photo"
+            />
+          </button>
 
-        <NavLink to="/" onClick={LogoutUser}>
-          Logout
-        </NavLink>
-      </ShowOnLogin>
-    </div>
+          <div
+            id="dropdownAvatar"
+            className={
+              (isDropdownOpen
+                ? "visible absolute right-[69px] top-16"
+                : "hidden") +
+              " z-10 w-[200px] bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
+            }
+            data-popper-reference-hidden=""
+            data-popper-escaped=""
+            data-popper-placement="bottom"
+            // style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 20848px, 0px);"
+          >
+            <div className="py-3 px-4 text-sm text-gray-900 dark:text-white">
+              <Link to="/profile">{displayName}</Link>
+              <div className="font-medium truncate">{email}</div>
+            </div>
+
+            <div className="py-1 block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+              <NavLink to="/" onClick={LogoutUser}>
+                Logout
+              </NavLink>
+            </div>
+          </div>
+        </ShowOnLogin>
+      </div>
+    </nav>
   );
 }

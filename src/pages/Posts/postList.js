@@ -11,7 +11,7 @@ export default function PostList() {
     getPosts();
   }, []);
   useEffect(() => {
-    console.log(post);
+    // console.log(post);
   }, [post]);
   function getPosts() {
     const querySnapshot = collection(db, "PostList");

@@ -13,7 +13,7 @@ export default function PostDetails() {
   }, []);
 
   useEffect(() => {
-    console.log(post);
+    // console.log(post);
   }, [post]);
 
   async function getPost() {
@@ -25,7 +25,7 @@ export default function PostDetails() {
     <>
       <div>{"Title: " + post.Title}</div>
       <div>{"Content: " + post.Contant}</div>
-      <div>{"Author: " + post.author}</div>
+      <div>{"Author: " + post.AuthorID}</div>
     </>
   );
 }

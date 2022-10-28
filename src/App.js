@@ -3,18 +3,15 @@ import HomePage from "./pages/homePage";
 import Login from "./pages/Auth/login";
 import Register from "./pages//Auth/register";
 import ResetPassword from "./components/reset";
-import Profle from "./pages/profle";
+import Profle from "./pages/user/profle";
 import CreatePost from "./pages/Posts/createPost";
 // import PostDetails from "./pages/Posts/postDetails";
-import Navbar from "./pages/Navbar";
-import PostList from "./pages/Posts/postList";
-import PostSummary from "./pages/Posts/PostSummary";
-import PostDetails from "./pages/Posts/postDetails";
 
+import PostDetails from "./pages/Posts/postDetails";
+import UserPostDetails from "./pages/user/userPostDetails";
 function App() {
   return (
     <>
-      <Navbar />
       <div>
         <Routes>
           <Route exact path="/" element={<HomePage />} />
@@ -26,6 +23,7 @@ function App() {
 
           <Route path="/reset" element={<ResetPassword />} />
           <Route path="/Post/:id" element={<PostDetails />} />
+          <Route path="/userPost/:id" element={<UserPostDetails />} />
         </Routes>
       </div>
     </>
