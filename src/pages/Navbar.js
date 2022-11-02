@@ -10,9 +10,6 @@ import ShowOnLogin from "../components/hiddenLinks/hiddenLinks";
 import { ShowOnLogout } from "../components/hiddenLinks/hiddenLinks";
 import { useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import CreatePost from "./Posts/createPost";
-// import "flowbite";
-// import "flowbite-react";
 
 import imgRig from "./Group 5.png";
 
@@ -114,7 +111,6 @@ export default function Navbar() {
             data-popper-reference-hidden=""
             data-popper-escaped=""
             data-popper-placement="bottom"
-            // style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 20848px, 0px);"
           >
             <div className="py-3 px-4 text-sm text-gray-900 dark:text-white">
               <Link to="/profile">{displayName}</Link>

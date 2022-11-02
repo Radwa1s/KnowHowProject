@@ -1,9 +1,5 @@
-//
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import CreatePost from "./Posts/createPost";
-// import PostDetails from "./Posts/postDetails";
 import PostList from "./Posts/postList";
 import ShowOnLogin, {
   ShowOnLogout,
@@ -16,10 +12,9 @@ export default function HomePage() {
     <>
       <Navbar />
       <div className="bg-bgImg mt-[150px] bg-contain bg-no-repeat w-full h-screen">
-        {" "}
         <ShowOnLogin>
           <CreatePost />
-          <PostList />{" "}
+          <PostList />
         </ShowOnLogin>
         <ShowOnLogout>
           <SearchHome />

@@ -12,9 +12,9 @@ export default function PostList() {
   }, []);
   useEffect(() => {
     // console.log(post);
-  }, [post]);
+  }, []);
   function getPosts() {
-    const querySnapshot = collection(db, "PostList");
+    const querySnapshot = collection(db, "projects");
     getDocs(querySnapshot)
       .then((response) => {
         const pt = response.docs.map((doc) => ({

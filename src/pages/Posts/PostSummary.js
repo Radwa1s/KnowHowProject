@@ -1,7 +1,6 @@
 import React from "react";
 
 export default function PostSummary({ post }) {
-  // console.log(post);
   return (
     <div>
       <h1>{post.data.Title}</h1>
