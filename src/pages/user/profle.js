@@ -1,27 +1,30 @@
 import React from "react";
-import { onAuthStateChanged, getAuth } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { SET_ACTIVE_USER } from "../../redux/slice/authSlice";
 import { REMOVE_ACTIVE_USER } from "../../redux/slice/authSlice";
 import { useEffect, useState } from "react";
 import { auth } from "../../firebase";
+import { getAuth } from "firebase/auth";
 import imgRig from "../Group 5.png";
 import logo from "../Group.png";
 import { Link } from "react-router-dom";
 import UserPostList from "./userPostList";
+import { onAuthStateChanged } from "firebase/auth";
 
 export default function Profle() {
   const [displayName, setDisplayName] = useState("");
   const [email, setDisplayEmail] = useState("");
-  const [uid, setDisplayUid] = useState("");
+  // const [uid, setDisplayUid] = useState("");
 
   const dispatch = useDispatch();
+  const auth = getAuth();
+  const user = auth.currentUser;
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setDisplayName(user.displayName);
         setDisplayEmail(user.email);
-        setDisplayUid(user.uid);
+        // setDisplayUid(user.uid);
 
         dispatch(
           SET_ACTIVE_USER({
@@ -36,7 +39,7 @@ export default function Profle() {
         dispatch(REMOVE_ACTIVE_USER());
       }
     });
-  }, [dispatch, displayName]);
+  }, []);
 
   return (
     <div className=" bg-whiteGray w-full h-full">
@@ -58,6 +61,7 @@ export default function Profle() {
               <h1 className="flex justify-center p-5">{displayName}</h1>
               <h2>{email}</h2>
             </div>
+
             <UserPostList />
           </div>
         </div>

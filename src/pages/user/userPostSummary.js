@@ -2,19 +2,18 @@ import React from "react";
 import { useState } from "react";
 import { ref, child, push, update } from "firebase/database";
 import { database } from "../../firebase";
-import {
-  collection,
-  doc,
-  setDoc,
-  getDoc,
-  deleteDoc,
-  onSnapshot,
-} from "firebase/firestore";
-import { updateDoc } from "firebase/firestore";
-import { colRef, db } from "../../firebase";
-import { useRef } from "react";
+import { doc, getDoc, deleteDoc, getDocs } from "firebase/firestore";
+import { useParams } from "react-router-dom";
+import { db } from "../../firebase";
 import { useEffect } from "react";
-export default function UserPostSummary({ post }) {
+import { auth } from "../../firebase";
+import { colRef } from "../../firebase";
+import { onAuthStateChanged } from "firebase/auth";
+import { query } from "firebase/firestore";
+import { where } from "firebase/firestore";
+import { get } from "firebase/database";
+export default function UserPostSummary({ post, handleDelete }) {
+  console.log(post);
   const [edit, setEdit] = useState(false);
   const [update, setUpdate] = useState();
   const handleUpdatePost = (e) => {
@@ -31,18 +30,56 @@ export default function UserPostSummary({ post }) {
   //     }).then(updatePost.reset());
   //   });
   // };
+  // useEffect(() => {
+  //   handleDelete();
+  // });
+
   // const handleDelete = () => {
+  //   onAuthStateChanged(auth, (user) => {
+  //     if (user) {
+  //       getDocs(colRef).then((response) => {
+  //         const pt = response.docs.filter(() => ({
+  //           id: post.id,
+  //         }));
+  //         const q = query(colRef, where("id", "==", post.id));
+  //         console.log(q);
+  //       });
+  //     }
+  //   }).catch((err) => console.log(err.massage));
+  // };
+  // const user = auth.currentUser;
 
-  //   const doc = db.collection("projects").doc();
+  // const q = query(colRef, where("AuthorID" == user.uid));
+  // getDocs(q).then((snap) => {
+  //   const res = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
 
-  //   const observer = doc.onSnapshot((docSnapshot) => {
-  //     console.log(docSnapshot);
+  //   console.log(res);
+  // });
+
+  // })
+  // }
+
+  // }
+  // })
+
+  // const res = querySnapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
+  // console.log(res);
+  // deleteDoc(docRef);
+
+  // deleteDoc(doc(db, "PostList", post));
+
+  // useEffect(() => {
+  //   // function handleDelete() {
+  //   onAuthStateChanged(auth, (user) => {
+  //     if (user) {
+  //       const q = query(colRef, where("id", "==", post.id));
+  //       get(q).then((querySnapshot) => {
+  //         console.log(querySnapshot);
+  //       });
+  //     }
   //   });
-  // };
-
-  // const handleDelete = () => {
-  //   deleteDoc(doc(db, "projects", post.id));
-  // };
+  //   // }
+  // }, []);
 
   return (
     <div className="border-2">
@@ -52,7 +89,15 @@ export default function UserPostSummary({ post }) {
           <button className="bg-lightGreen m-5" onClick={() => setEdit(true)}>
             edit
           </button>
-          <button className="bg-lightGreen m-5">Delete</button>
+          <button
+            className=" delete bg-lightGreen m-5"
+            type="submit"
+            onClick={() => {
+              handleDelete(post.id);
+            }}
+          >
+            Delete
+          </button>
         </>
       ) : (
         <>
@@ -60,7 +105,7 @@ export default function UserPostSummary({ post }) {
             <>
               <form className="update">
                 <textarea
-                  defaultValue={post.contant}
+                  defaultValue={post.Contant}
                   type="text"
                   name="contant"
                   onChange={(e) => {

@@ -6,19 +6,21 @@ import ShowOnLogin, {
 } from "../components/hiddenLinks/hiddenLinks";
 import SearchHome from "./searchHome";
 import Navbar from "./Navbar";
-
+import { getAuth } from "firebase/auth";
 export default function HomePage() {
   return (
     <>
       <Navbar />
       <div className="bg-bgImg mt-[150px] bg-contain bg-no-repeat w-full h-screen">
-        <ShowOnLogin>
+        {/* <ShowOnLogin> */}
+        <div>
           <CreatePost />
           <PostList />
-        </ShowOnLogin>
-        <ShowOnLogout>
+        </div>
+        {/* </ShowOnLogin> */}
+        {/* <ShowOnLogout>
           <SearchHome />
-        </ShowOnLogout>
+        </ShowOnLogout> */}
       </div>
     </>
   );

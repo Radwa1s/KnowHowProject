@@ -3,7 +3,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
-import Loader from "../../components/loader";
 import { Link, useNavigate } from "react-router-dom";
 import "../css.css";
 import { GoogleAuthProvider, updateProfile } from "firebase/auth";
@@ -36,14 +35,12 @@ const Register = () => {
         });
         // const user = userCredential.user;
         // console.log(user);
-        setIsLoading(false);
-        toast.success("done.");
         navigate("/profile");
         window.location.reload();
+        window.localStorage.setItem("Loggedin", true);
       })
       .catch((error) => {
         toast.error(error.message);
-        setIsLoading(false);
       });
   };
   const provider = new GoogleAuthProvider();
@@ -51,9 +48,11 @@ const Register = () => {
   const SignInWithGoogle = (e) => {
     signInWithPopup(auth, provider)
       .then((result) => {
-        // const user = result.user;
-        toast.success("done");
+        const user = result.user;
+        // console.log(result);
+        // toast.success("done");
         navigate("/");
+        window.localStorage.setItem("Loggedin", true);
       })
       .catch((error) => {
         toast.error(error.massage);
@@ -61,7 +60,6 @@ const Register = () => {
   };
   return (
     <div>
-      {isLoading && <Loader />}
       <div className="bg-gray-50 dark:bg-gray-900 w-full h-full"></div>
 
       <section className="bg-gray-50 dark:bg-gray-900 h-screen">
@@ -94,7 +92,7 @@ const Register = () => {
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                 >
-                  <g clip-path="url(#clip0_13183_10121)">
+                  <g clipPath="url(#clip0_13183_10121)">
                     <path
                       d="M20.3081 10.2303C20.3081 9.55056 20.253 8.86711 20.1354 8.19836H10.7031V12.0492H16.1046C15.8804 13.2911 15.1602 14.3898 14.1057 15.0879V17.5866H17.3282C19.2205 15.8449 20.3081 13.2728 20.3081 10.2303Z"
                       fill="#3F83F8"

@@ -1,47 +1,92 @@
-import { onSnapshot, addDoc } from "firebase/firestore";
+import { addDoc } from "firebase/firestore";
 import { colRef } from "../../firebase";
-import { getAuth } from "firebase/auth";
-import { useState } from "react";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useEffect, useState } from "react";
+import { auth } from "../../firebase";
+import { onSnapshot } from "firebase/firestore";
 
 function CreatePost() {
-  const [data, setData] = useState([]);
-
-  onSnapshot(colRef, (snapshot) => {
-    let posts = [];
-    snapshot.docs.forEach((doc) => {
-      posts.push({ ...doc.data(), id: doc.id });
+  // const [authUser, setAuthUser] = useState(null);
+  // const [theContant, setTheContant] = useState([]);
+  const [data, setData] = useState();
+  useEffect(() => {
+    onSnapshot(colRef, (snapshot) => {
+      let posts = [];
+      snapshot.docs.forEach((doc) => {
+        posts.push({ ...doc.data(), id: doc.id });
+      });
+      setData(posts);
     });
-    setData(posts);
-  });
+  }, []);
+  // function handleChanges(e) {
+  //   setTheContant(e.target.value);
+  //   e.preventDefault();
+  // }
 
-  const handleAddPost = (e) => {
-    const addPost = document.querySelector(".add");
+  // useEffect(() => {
+  //   handleAddPost();
+  // });
 
-    e.preventDefault();
-    const auth = getAuth();
+  // function handleAddPost() {
+  //   onAuthStateChanged(auth, (user) => {
+  //     if (user) {
+  //       if (theContant === "") {
+  //         return;
+  //       }
+  //       // console.log(user);
 
-    const user = auth.currentUser;
+  //       const auth = getAuth();
+  //       const user = auth.currentUser;
+  //       addDoc(colRef, {
+  //         Contant: theContant,
+  //         AuthorID: user.uid,
+  //       }).then((response) => {
+  //         console.log(response);
+  //       });
+  //       setTheContant("");
+  //     }
+  //   });
+  useEffect(() => {
+    handleAddPost();
+  }, []);
 
-    addDoc(colRef, {
-      Contant: addPost.contant.value,
-      AuthorID: user.uid,
+  const handleAddPost = () => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const addPost = document.querySelector(".add");
+
+        const user = auth.currentUser;
+
+        addDoc(colRef, {
+          Contant: addPost.contant.value,
+          AuthorID: user.uid,
+        });
+
+        addPost.reset();
+      }
     });
-
-    addPost.reset();
   };
-
   return (
     <div>
       <form className="add">
         <div className="relative flex  ">
-          <textarea placeholder="Contant" name="contant" required />
+          <textarea
+            placeholder="Contant"
+            name="contant"
+            // defaultValue={theContant}
+            // onChange={handleChanges}
+            required
+          />
           {/* <input name="author" placeholder="Author" /> */}
           <button
-            onClick={handleAddPost}
+            // type="submit"
+            onClick={(e) => {
+              e.preventDefault();
+
+              handleAddPost();
+            }}
             className="text-black absolute   bg-lightGreen  focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-4 py-2 "
-          >
-            Create
-          </button>
+          ></button>
         </div>
       </form>
     </div>
