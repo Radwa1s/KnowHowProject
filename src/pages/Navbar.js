@@ -62,81 +62,116 @@ export default function Navbar() {
     isDropdownOpen ? setIsDropdownOpen(false) : setIsDropdownOpen(true);
   };
   return (
-    <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
-      <div className="container flex flex-wrap justify-between items-center mx-auto">
-        <Link to="/">
-          <img src={logo} />
-        </Link>
-        {/* <ShowOnLogout> */}
-        {!Loggedin ? (
-          <>
-            <div>
-              <Link to="/login">
-                {" "}
-                <button
-                  type="button"
-                  className="text-black font-inter bg-white  focus:ring-1 focus:ring-lightGreen font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2   focus:outline-none "
-                >
-                  Login
-                </button>
+    // <nav className="bg-white justify-between  border-gray-200 px-2  sm:px-4 py-2.5 rounded dark:bg-gray-900">
+    <div>
+      {/* <ShowOnLogout> */}
+      {!Loggedin ? (
+        <>
+          <Link to="/">
+            <img src={logo} />
+          </Link>
+          <div>
+            <Link to="/login">
+              {" "}
+              <button
+                type="button"
+                className="text-black font-inter bg-white  focus:ring-1 focus:ring-lightGreen font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2   focus:outline-none "
+              >
+                Login
+              </button>
+            </Link>
+            <Link to="/Register">
+              <button
+                type="button"
+                className="text-black font-inter bg-lightGreen hover:bg-lightGreen focus:ring-1 focus:ring-lightGreen font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:lightGreen dark:hover:lightGreen focus:outline-none dark:focus:lightGreen"
+              >
+                Sign up
+              </button>
+            </Link>
+          </div>
+        </>
+      ) : (
+        /* </ShowOnLogout> */
+
+        /* <ShowOnLogin> */
+        <>
+          <div className="justify-between flex mt-8">
+            <div className="w-[80%]">
+              <Link to="/" className="float-left ml-[40px] mr-[40px]">
+                <img src={logo} />
               </Link>
-              <Link to="/Register">
-                <button
-                  type="button"
-                  className="text-black font-inter bg-lightGreen hover:bg-lightGreen focus:ring-1 focus:ring-lightGreen font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:lightGreen dark:hover:lightGreen focus:outline-none dark:focus:lightGreen"
-                >
-                  Sign up
-                </button>
-              </Link>
+              <form className="">
+                <input
+                  type="search"
+                  id="default-search"
+                  className="inline p-4 pl-10 w-[200px] h-[40px]  text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="Search Mockups, Logos..."
+                  required
+                />
+                <div className="flex absolute justify-center items-center pl-3 pointer-events-none">
+                  <svg
+                    aria-hidden="true"
+                    className="w-5 h-5 text-gray-500 dark:text-gray-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                    ></path>
+                  </svg>
+                </div>
+              </form>
             </div>
-          </>
-        ) : (
-          /* </ShowOnLogout> */
 
-          /* <ShowOnLogin> */
-          <>
-            <button
-              onClick={toggleDropdown}
-              id="dropdownUserAvatarButton"
-              data-dropdown-toggle="dropdownAvatar"
-              className="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 "
-              type="button"
-            >
-              <span className="sr-only">Open user menu</span>
-              <img
-                className="w-8 h-8 rounded-full"
-                src={imgRig}
-                alt="user photo"
-              />
-            </button>
-
-            <div
-              id="dropdownAvatar"
-              className={
-                (isDropdownOpen
-                  ? "visible absolute right-[69px] top-16"
-                  : "hidden") +
-                " z-10 w-[200px] bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
-              }
-              data-popper-reference-hidden=""
-              data-popper-escaped=""
-              data-popper-placement="bottom"
-            >
-              <div className="py-3 px-4 text-sm text-gray-900 dark:text-white">
-                <Link to={"/profile"}>{displayName}</Link>;
-                <div className="font-medium truncate">{email}</div>
-              </div>
-
-              <div className="py-1 block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
-                <NavLink to="/" onClick={LogoutUser}>
-                  Logout
-                </NavLink>
-              </div>
+            <div className="mr-[50px]">
+              <button
+                onClick={toggleDropdown}
+                id="dropdownUserAvatarButton"
+                data-dropdown-toggle="dropdownAvatar"
+                className="flex mx-3  text-sm bg-gray-800 rounded-full md:mr-0 "
+                type="button"
+              >
+                <span className="sr-only">Open user menu</span>
+                <img
+                  className="w-8 h-8 rounded-full"
+                  src={imgRig}
+                  alt="user photo"
+                />
+              </button>
             </div>
-            {/* </ShowOnLogin> */}
-          </>
-        )}
-      </div>
-    </nav>
+          </div>
+          <div
+            id="dropdownAvatar"
+            className={
+              (isDropdownOpen
+                ? "visible absolute right-[69px] top-16"
+                : "hidden") +
+              " z-10 w-[200px] bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
+            }
+            data-popper-reference-hidden=""
+            data-popper-escaped=""
+            data-popper-placement="bottom"
+          >
+            <div className="py-3 px-4 text-sm text-gray-900 dark:text-white">
+              <Link to={"/profile"}>{displayName}</Link>;
+              <div className="font-medium truncate">{email}</div>
+            </div>
+
+            <div className="py-1 block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+              <NavLink to="/" onClick={LogoutUser}>
+                Logout
+              </NavLink>
+            </div>
+          </div>
+          {/* </ShowOnLogin> */}
+        </>
+      )}
+    </div>
+    // </nav>
   );
 }
