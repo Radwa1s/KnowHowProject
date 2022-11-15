@@ -9,6 +9,8 @@ function CreatePost() {
   // const [authUser, setAuthUser] = useState(null);
   // const [theContant, setTheContant] = useState([]);
   const [data, setData] = useState();
+  const [isOpen, setIsOpen] = useState(false);
+
   useEffect(() => {
     onSnapshot(colRef, (snapshot) => {
       let posts = [];
@@ -46,47 +48,58 @@ function CreatePost() {
   //       setTheContant("");
   //     }
   //   });
-  useEffect(() => {
-    handleAddPost();
-  }, []);
+  ///////////////////////////
+  // useEffect(() => {
+  //   handleAddPost();
+  // }, []);
 
-  const handleAddPost = () => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        const addPost = document.querySelector(".add");
+  // const handleAddPost = () => {
+  //   onAuthStateChanged(auth, (user) => {
+  //     if (user) {
+  //       const addPost = document.querySelector(".add");
 
-        const user = auth.currentUser;
+  //       const user = auth.currentUser;
 
-        addDoc(colRef, {
-          Contant: addPost.contant.value,
-          AuthorID: user.uid,
-        });
+  //       addDoc(colRef, {
+  //         Contant: addPost.contant.value,
+  //         AuthorID: user.uid,
+  //         // CreateAt: toDate(),
+  //       });
 
-        addPost.reset();
-      }
-    });
+  //       addPost.reset();
+  //     }
+  //   });
+  // };
+  const handleInputStyle = () => {
+    setIsOpen(true);
+  };
+  const input = {
+    width: isOpen ? "725px" : "",
+    height: isOpen ? "100px" : "",
   };
   return (
     <div>
       <form className="add">
-        <div className="relative flex  ">
+        <div className="w-[850px]">
           <textarea
-            placeholder="Contant"
+            placeholder="Share your experience...."
             name="contant"
-            // defaultValue={theContant}
-            // onChange={handleChanges}
+            style={input}
+            onClick={handleInputStyle}
             required
+            className="bg-whiteGray ml-6 h-[50px]  w-[725px] .placeholder-whiteGray .placeholder-font-inter resize-none rounded-md border-gray-100"
           />
-          {/* <input name="author" placeholder="Author" /> */}
+          {isOpen?
           <button
-            // type="submit"
-            onClick={(e) => {
-              e.preventDefault();
+            // onClick={(e) => {
+            //   e.preventDefault();
 
-              handleAddPost();
-            }}
-            className="text-black absolute   bg-lightGreen  focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-4 py-2 "
-          ></button>
+            //   handleAddPost();
+            // }}
+            className="text-black relative bg-lightGreen w-[100px] font-inter right-[14%] bottom-[22px]  focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-4 py-2 "
+          >
+            Post
+          </button>}
         </div>
       </form>
     </div>

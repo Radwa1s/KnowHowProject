@@ -9,19 +9,13 @@ import Navbar from "./Navbar";
 import { getAuth } from "firebase/auth";
 export default function HomePage() {
   return (
-    <>
+    <div>
       <Navbar />
-      <div className="bg-bgImg mt-[150px] bg-contain bg-no-repeat w-full h-screen">
-        {/* <ShowOnLogin> */}
-        <div>
-          <CreatePost />
-          <PostList />
-        </div>
-        {/* </ShowOnLogin> */}
-        {/* <ShowOnLogout>
-          <SearchHome />
-        </ShowOnLogout> */}
+
+      <div className="ml-[4%] border-[1px] p-[22px] w-[60%]">
+        <CreatePost />
+        <PostList />
       </div>
-    </>
+    </div>
   );
 }

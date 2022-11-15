@@ -97,18 +97,18 @@ export default function Navbar() {
         <>
           <div className="justify-between flex mt-8">
             <div className="w-[80%]">
-              <Link to="/" className="float-left ml-[40px] mr-[40px]">
+              <Link to="/" className="float-left ml-[80px] mr-[40px]">
                 <img src={logo} />
               </Link>
               <form className="">
                 <input
                   type="search"
                   id="default-search"
-                  className="inline p-4 pl-10 w-[200px] h-[40px]  text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="Search Mockups, Logos..."
+                  className=" p-4 pl-10 w-[400px] h-[40px]  text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="How can I get over..."
                   required
                 />
-                <div className="flex absolute justify-center items-center pl-3 pointer-events-none">
+                <div className="text-gray relative w-[100px]  left-[187px] bottom-[37px] focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-4 py-2 ">
                   <svg
                     aria-hidden="true"
                     className="w-5 h-5 text-gray-500 dark:text-gray-400"
@@ -128,7 +128,7 @@ export default function Navbar() {
               </form>
             </div>
 
-            <div className="mr-[50px]">
+            <div className="mr-[100px] mt-2">
               <button
                 onClick={toggleDropdown}
                 id="dropdownUserAvatarButton"
@@ -138,7 +138,7 @@ export default function Navbar() {
               >
                 <span className="sr-only">Open user menu</span>
                 <img
-                  className="w-8 h-8 rounded-full"
+                  className="w-8 h-8 rounded-full bg-white"
                   src={imgRig}
                   alt="user photo"
                 />
@@ -158,7 +158,7 @@ export default function Navbar() {
             data-popper-placement="bottom"
           >
             <div className="py-3 px-4 text-sm text-gray-900 dark:text-white">
-              <Link to={"/profile"}>{displayName}</Link>;
+              <Link to={"/profile"}>{displayName}</Link>
               <div className="font-medium truncate">{email}</div>
             </div>
 

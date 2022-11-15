@@ -5,6 +5,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { auth, db } from "../../firebase";
 import PostSummary from "./PostSummary";
+import { deleteDoc, doc } from "firebase/firestore";
+import { colRef } from "../../firebase";
 
 export default function PostList() {
   const [post, setPost] = useState([]);
@@ -29,14 +31,25 @@ export default function PostList() {
     });
   }, []);
 
+  const handleDelete = async (id) => {
+    await deleteDoc(doc(colRef, id));
+  };
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        handleDelete();
+      }
+    });
+  }, []);
+
   return (
     <div>
       {post.map((post) => {
         // console.log(post);
         return (
-          <Link to={"/Post/" + post.id} key={post.id}>
-            <PostSummary post={post} />
-          </Link>
+          // <Link key={post.id}>
+          <PostSummary post={post} handleDelete={handleDelete} />
+          // </Link>
         );
       })}
     </div>
