@@ -75,7 +75,7 @@ function CreatePost() {
   };
   const input = {
     width: isOpen ? "725px" : "",
-    height: isOpen ? "100px" : "",
+    height: isOpen ? "150px" : "",
   };
   return (
     <div>
@@ -89,17 +89,20 @@ function CreatePost() {
             required
             className="bg-whiteGray ml-6 h-[50px]  w-[725px] .placeholder-whiteGray .placeholder-font-inter resize-none rounded-md border-gray-100"
           />
-          {isOpen?
-          <button
-            // onClick={(e) => {
-            //   e.preventDefault();
+          {isOpen ? (
+            <button
+              // onClick={(e) => {
+              //   e.preventDefault();
 
-            //   handleAddPost();
-            // }}
-            className="text-black relative bg-lightGreen w-[100px] font-inter right-[14%] bottom-[22px]  focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-4 py-2 "
-          >
-            Post
-          </button>}
+              //   handleAddPost();
+              // }}
+              className="text-black relative bg-lightGreen w-[100px] font-inter right-[14%] bottom-[22px]  focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-4 py-2 "
+            >
+              Post
+            </button>
+          ) : (
+            ""
+          )}
         </div>
       </form>
     </div>
