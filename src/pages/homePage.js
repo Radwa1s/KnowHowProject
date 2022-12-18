@@ -12,7 +12,7 @@ export default function HomePage() {
     <div>
       <Navbar />
 
-      <div className="ml-[4%] border-[1px] p-[22px] w-[60%]">
+      <div className="ml-[4%] mb-[40px]  border-[1px] rounded-lg  w-[60%] pl-[47px] pr-[47px] pt-[40px]  pb-[40px]">
         <CreatePost />
         <PostList />
       </div>

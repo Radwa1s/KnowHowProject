@@ -1,23 +1,27 @@
 import React from "react";
 import { useState } from "react";
-import { ref, child, push, update } from "firebase/database";
-import { database } from "../../firebase";
-import { doc, getDoc, deleteDoc, getDocs } from "firebase/firestore";
-import { useParams } from "react-router-dom";
-import { db } from "../../firebase";
+
 import { useEffect } from "react";
 import { auth } from "../../firebase";
-import { colRef } from "../../firebase";
 import { onAuthStateChanged } from "firebase/auth";
-import { query } from "firebase/firestore";
-import { where } from "firebase/firestore";
-import { get } from "firebase/database";
+
+import imgRig from "../Group 5.png";
+import { useDispatch } from "react-redux";
+import { SET_ACTIVE_USER } from "../../redux/slice/authSlice";
+
 export default function UserPostSummary({ post, handleDelete }) {
   console.log(post);
   const [edit, setEdit] = useState(false);
+  const [displayName, setDisplayName] = useState("");
+
+  const [isOpen, setIsOpen] = useState(false);
+
   const [update, setUpdate] = useState();
   const handleUpdatePost = (e) => {
     setEdit(false);
+  };
+  const dropdown = () => {
+    isOpen ? setIsOpen(false) : setIsOpen(true);
   };
 
   //   const updatePost = document.querySelector(".update");
@@ -81,71 +85,149 @@ export default function UserPostSummary({ post, handleDelete }) {
   //   // }
   // }, []);
 
+  const dispatch = useDispatch();
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setDisplayName(user.displayName);
+        // setDisplayUid(user.uid);
+
+        dispatch(
+          SET_ACTIVE_USER({
+            email: user.email,
+            userName: user.displayName,
+            userID: user.uid,
+          })
+        );
+      } else {
+        setDisplayName("");
+        dispatch(REMOVE_ACTIVE_USER());
+      }
+    });
+  }, []);
   return (
-    <div className="border-2">
+    <div>
       {edit === false ? (
         <>
-          <h6>{post.Contant}</h6>
-          <button className="bg-lightGreen m-5" onClick={() => setEdit(true)}>
-            edit
-          </button>
-          <button
-            className=" delete bg-lightGreen m-5"
-            type="submit"
-            onClick={() => {
-              handleDelete(post.id);
-            }}
-          >
-            Delete
-          </button>
+          <div className="">
+            <div className="justify-between  items-baseline flex border-t-[1px] w-full h-full  ">
+              <div className="flex  item-center mt-[28px] mb-[28px] ">
+                <div className="flex">
+                  <div className=" ">
+                    <div className="flex">
+                      <button
+                        id="dropdownUserAvatarButton"
+                        data-dropdown-toggle="dropdownAvatar"
+                        className="  mx-3  text-sm bg-gray-800 rounded-full md:mr-0 "
+                        type="button"
+                      >
+                        <img
+                          className="w-[40px] h-[40px]  rounded-full bg-white"
+                          src={imgRig}
+                          alt="user photo"
+                        />
+                      </button>
+
+                      <div>
+                        <h1 className="ml-[10px] text-[14px] font-bold">
+                          {displayName}
+                        </h1>
+                        <h1 className="text-[11px] ml-[10px]">
+                          {post.CreateAt}
+                        </h1>
+                      </div>
+                    </div>
+                    <div className=" ml-[15px]  mt-[20px]">
+                      <p>{post.Contant}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <button
+                  onClick={dropdown}
+                  id="dropdownMenuIconButton"
+                  data-dropdown-toggle="dropdownDots"
+                  class="inline-flex items-center p-2  text-center text-gray-900 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                  type="button"
+                >
+                  <svg
+                    class="w-5 h-6 "
+                    aria-hidden="true"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path>
+                  </svg>
+                </button>
+                <div
+                  id="dropdownAvatar"
+                  className={
+                    (isOpen ? "  absolute" : "hidden") +
+                    " z-10  bg-gray   rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
+                  }
+                  data-popper-reference-hidden=""
+                  data-popper-escaped=""
+                  data-popper-placement="bottom"
+                >
+                  <button
+                    className="py-1 block py-2 w-full px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    onClick={() => {
+                      handleDelete(post.id);
+                    }}
+                  >
+                    Delete
+                  </button>
+                  <button
+                    className="py-1 block py-2 w-full px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    onClick={() => setEdit(true)}
+                  >
+                    Edit
+                  </button>
+                </div>
+              </div>
+            </div>{" "}
+          </div>
         </>
       ) : (
         <>
           {edit === true && (
             <>
-              <form className="update">
-                <textarea
-                  defaultValue={post.Contant}
-                  type="text"
-                  name="contant"
-                  onChange={(e) => {
-                    setUpdate(e.target.defaultValue);
-                  }}
-                />
-                <button onClick={handleUpdatePost}>Update</button>
+              <div className="flex border-t-[1px] ">
+                <form>
+                  <textarea
+                    defaultValue={post.Contant}
+                    type="text"
+                    name="contant"
+                    onChange={(e) => {
+                      setUpdate(e.target.defaultValue);
+                    }}
+                    className=" mt-[20px]  bg-whiteGray  h-[160px]  w-[725px] .placeholder-whiteGray .placeholder-font-inter resize-none rounded-md border-gray-100"
+                  />
+                  <button
+                    onClick={handleUpdatePost}
+                    className="text-black relative bg-lightGreen  w-[75px] font-inter bottom-[52px] left-[550px]  focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-4 py-2 "
+                  >
+                    Update
+                  </button>
 
-                <button
-                  type="button"
-                  onClick={() => {
-                    setEdit(false);
-                  }}
-                >
-                  Cancel
-                </button>
-              </form>
+                  <button
+                    type="button"
+                    className="text-black relative bg-lightGreen w-[75px] font-inter bottom-[52px] left-[560px]  focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-4 py-2 "
+                    onClick={() => {
+                      setEdit(false);
+                    }}
+                  >
+                    Cancel
+                  </button>
+                </form>
+              </div>
             </>
           )}
         </>
       )}
-
-      {/* {edit === true && (
-        <>
-          <form>
-            <input
-              placeholder="update"
-              type="text"
-              onChange={(e) => setUpdate(e.target.value)}
-            />
-            <button
-              onClick={() => {
-                setEdit(false);
-              }}
-            >
-              Update
-            </button>
-          </form>
-        </>
-      )} */}
     </div>
   );
 }

@@ -7,7 +7,6 @@ import CreatePost from "./pages/Posts/createPost";
 // import PostDetails from "./pages/Posts/postDetails";
 
 import PostDetails from "./pages/Posts/postDetails";
-import UserPostDetails from "./pages/user/userPostDetails";
 import SearchHome from "./pages/searchHome";
 import Login from "./pages/Auth/login";
 function App() {

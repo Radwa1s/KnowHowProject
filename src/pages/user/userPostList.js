@@ -39,11 +39,7 @@ export default function UserPostList() {
   return (
     <div>
       {post.map((post) => {
-        return (
-          <Link key={post.id}>
-            <UserPostSummary post={post} handleDelete={handleDelete} />
-          </Link>
-        );
+        return <UserPostSummary post={post} handleDelete={handleDelete} />;
       })}
     </div>
   );

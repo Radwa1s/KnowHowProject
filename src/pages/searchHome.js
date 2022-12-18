@@ -4,11 +4,11 @@ import Navbar from "./Navbar";
 
 export default function SearchHome() {
   return (
-    <div>
+    <div className="m-5">
       {/* <ShowOnLogout> */}
       <Navbar />
-      <div>
-        <h1 className="mb-4 text-4xl font-extrabold text-center tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+      <div className="">
+        <h1 className="mt-[40px] text-4xl font-extrabold text-center tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
           Know How <br />
           To Get Over Things
         </h1>
@@ -17,7 +17,7 @@ export default function SearchHome() {
           <h6 className="text-sm">
             ― Anne Frank, diary of Anne Frank: the play
           </h6>
-          <form>
+          <form className="bg-bgImg bg-contain bg-no-repeat  h-screen m-5">
             <div className="relative flex flex-col justify-center items-center mt-[20px]">
               <input
                 type="search"

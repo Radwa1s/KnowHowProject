@@ -23,6 +23,8 @@ export const db = getFirestore(app);
 export const storage = getStorage(app);
 
 export const colRef = collection(db, "PostList");
+export const reqRef = collection(db, "req");
+
 const user = auth.currentUser;
 
 localStorage.setItem("currentUser", JSON.stringify(user));

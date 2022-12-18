@@ -62,45 +62,46 @@ export default function Navbar() {
     isDropdownOpen ? setIsDropdownOpen(false) : setIsDropdownOpen(true);
   };
   return (
-    // <nav className="bg-white justify-between  border-gray-200 px-2  sm:px-4 py-2.5 rounded dark:bg-gray-900">
     <div>
       {/* <ShowOnLogout> */}
       {!Loggedin ? (
         <>
-          <Link to="/">
-            <img src={logo} />
-          </Link>
-          <div>
-            <Link to="/login">
-              {" "}
-              <button
-                type="button"
-                className="text-black font-inter bg-white  focus:ring-1 focus:ring-lightGreen font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2   focus:outline-none "
-              >
-                Login
-              </button>
+          <nav className="bg-white  flex justify-between  border-gray-200 px-2  sm:px-4 py-2.5 rounded dark:bg-gray-900">
+            <Link to="/">
+              <img src={logo} />
             </Link>
-            <Link to="/Register">
-              <button
-                type="button"
-                className="text-black font-inter bg-lightGreen hover:bg-lightGreen focus:ring-1 focus:ring-lightGreen font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:lightGreen dark:hover:lightGreen focus:outline-none dark:focus:lightGreen"
-              >
-                Sign up
-              </button>
-            </Link>
-          </div>
+            <div>
+              <Link to="/login">
+                {" "}
+                <button
+                  type="button"
+                  className="text-black font-inter bg-white  focus:ring-1 focus:ring-lightGreen font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2   focus:outline-none "
+                >
+                  Login
+                </button>
+              </Link>
+              <Link to="/Register">
+                <button
+                  type="button"
+                  className="text-black font-inter bg-lightGreen hover:bg-lightGreen focus:ring-1 focus:ring-lightGreen font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:lightGreen dark:hover:lightGreen focus:outline-none dark:focus:lightGreen"
+                >
+                  Sign up
+                </button>
+              </Link>
+            </div>
+          </nav>
         </>
       ) : (
         /* </ShowOnLogout> */
 
         /* <ShowOnLogin> */
         <>
-          <div className="justify-between flex mt-8">
-            <div className="w-[80%]">
-              <Link to="/" className="float-left ml-[80px] mr-[40px]">
+          <div className="flex mt-8 justify-between ml-[5%]  border-b-[1px] w-[90%] place-items-center mb-[4%] ">
+            <div className=" container flex flex-wrap items-center  mx-auto mb-[2%]">
+              <Link to="/" className="  flex items-center ">
                 <img src={logo} />
               </Link>
-              <form className="">
+              <form className="flex ml-[30px]">
                 <input
                   type="search"
                   id="default-search"
@@ -108,7 +109,7 @@ export default function Navbar() {
                   placeholder="How can I get over..."
                   required
                 />
-                <div className="text-gray relative w-[100px]  left-[187px] bottom-[37px] focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-4 py-2 ">
+                <div className="text-gray relative w-[100px]  right-[80%] mt-[2px]  focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-4 py-2 ">
                   <svg
                     aria-hidden="true"
                     className="w-5 h-5 text-gray-500 dark:text-gray-400"
@@ -128,12 +129,12 @@ export default function Navbar() {
               </form>
             </div>
 
-            <div className="mr-[100px] mt-2">
+            <div className="flex mt-[-20px] mr-[40px]">
               <button
                 onClick={toggleDropdown}
                 id="dropdownUserAvatarButton"
                 data-dropdown-toggle="dropdownAvatar"
-                className="flex mx-3  text-sm bg-gray-800 rounded-full md:mr-0 "
+                className="flex text-sm bg-gray-800 rounded-full "
                 type="button"
               >
                 <span className="sr-only">Open user menu</span>
@@ -172,6 +173,5 @@ export default function Navbar() {
         </>
       )}
     </div>
-    // </nav>
   );
 }
