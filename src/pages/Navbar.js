@@ -48,10 +48,11 @@ export default function Navbar() {
   }, []);
 
   const LogoutUser = () => {
+    dispatch(REMOVE_ACTIVE_USER());
     signOut(auth)
       .then(() => {
         toast.success("done");
-        navigate("/");
+        navigate("/home");
         window.localStorage.removeItem("Loggedin");
       })
       .catch((error) => {
@@ -63,9 +64,9 @@ export default function Navbar() {
   };
   return (
     <div>
-      {/* <ShowOnLogout> */}
-      {!Loggedin ? (
-        <>
+      {/* {Loggedin ? ( */}
+      <>
+        <ShowOnLogout>
           <nav className="bg-white  flex justify-between  border-gray-200 px-2  sm:px-4 py-2.5 rounded dark:bg-gray-900">
             <Link to="/">
               <img src={logo} />
@@ -90,12 +91,11 @@ export default function Navbar() {
               </Link>
             </div>
           </nav>
-        </>
-      ) : (
-        /* </ShowOnLogout> */
-
-        /* <ShowOnLogin> */
-        <>
+        </ShowOnLogout>
+      </>
+      {/* ) : ( */}
+      <>
+        <ShowOnLogin>
           <div className="flex mt-8 justify-between ml-[5%]  border-b-[1px] w-[90%] place-items-center mb-[4%] ">
             <div className=" container flex flex-wrap items-center  mx-auto mb-[2%]">
               <Link to="/" className="  flex items-center ">
@@ -169,9 +169,9 @@ export default function Navbar() {
               </NavLink>
             </div>
           </div>
-          {/* </ShowOnLogin> */}
-        </>
-      )}
+        </ShowOnLogin>
+      </>
+      {/* )} */}
     </div>
   );
 }

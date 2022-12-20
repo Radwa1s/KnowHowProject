@@ -9,26 +9,26 @@ import CreatePost from "./pages/Posts/createPost";
 import PostDetails from "./pages/Posts/postDetails";
 import SearchHome from "./pages/searchHome";
 import Login from "./pages/Auth/login";
+import { selectIsLoggedIn } from "./redux/slice/authSlice";
 function App() {
   // console.log(Loggedin, "login");
   return (
     <>
       <div>
         <Routes>
-          <Route
-            exact
-            path="/"
-            element={Loggedin ? <HomePage /> : <SearchHome />}
-          />
+          {selectIsLoggedIn === false ? (
+            <Route exact path="/home" element={<SearchHome />} />
+          ) : (
+            <Route exact path="/" element={<HomePage />} />
+          )}
+          <Route exact path="/home" element={<SearchHome />} />
 
           <Route path="/Register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          {/* <Route path="/Posts" element={<CreatePost />} /> */}
           <Route path="/profile" element={<Profle />} />
 
           <Route path="/reset" element={<ResetPassword />} />
-          <Route path="/Post/:id" element={<PostDetails />} />
-          {/* <Route path="/userPost/:id" element={<UserPostDetails />} /> */}
+          {/* <Route path="/Post/:id" element={<PostDetails />} /> */}
         </Routes>
       </div>
     </>
