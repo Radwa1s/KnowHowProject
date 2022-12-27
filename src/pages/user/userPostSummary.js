@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { auth } from "../../firebase";
 import { onAuthStateChanged } from "firebase/auth";
-
+import { colRef } from "../../firebase";
 import imgRig from "../Group 5.png";
 import { useDispatch } from "react-redux";
 import { SET_ACTIVE_USER } from "../../redux/slice/authSlice";
@@ -52,13 +52,16 @@ export default function UserPostSummary({ post, handleDelete }) {
   //   }).catch((err) => console.log(err.massage));
   // };
   // const user = auth.currentUser;
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      const q = query(colRef, where("AuthorID" == user.uid));
+      getDocs(q).then((snap) => {
+        const res = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
 
-  // const q = query(colRef, where("AuthorID" == user.uid));
-  // getDocs(q).then((snap) => {
-  //   const res = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
-
-  //   console.log(res);
-  // });
+        console.log(res);
+      });
+    });
+  });
 
   // })
   // }

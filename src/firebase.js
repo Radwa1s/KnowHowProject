@@ -23,7 +23,9 @@ export const db = getFirestore(app);
 export const storage = getStorage(app);
 
 export const colRef = collection(db, "PostList");
-export const reqRef = collection(db, "req");
+export const arrayUnion = (data) => {
+  db.FieldValue.arrayUnion(data);
+};
 
 const user = auth.currentUser;
 
