@@ -85,180 +85,45 @@ export default function PostSummary({ post, handleDelete }) {
   const q = doc(db, "PostList", `${post.id}`);
 
   const handleDownClick = () => {
-    if (downvoters.includes(userID) || upvoters.includes(userID)) {
+    if (!downvoters.includes(userID)) {
+      upvoters = upvoters.filter((ele) => {
+        return ele != userID;
+      });
+      setDoc(q, { upVote: upvoters }, { merge: true });
+      downvoters.push(userID);
+      setDoc(q, { downVote: downvoters }, { merge: true });
+    } else {
       downvoters = downvoters.filter((ele) => {
         return ele != userID;
       });
       setDoc(q, { downVote: downvoters }, { merge: true });
-      // setDisLike(false);
       upvoters = upvoters.filter((ele) => {
         return ele != userID;
       });
       setDoc(q, { upVote: upvoters }, { merge: true });
     }
-    if (!downvoters.includes(userID || upvoters.includes(userID))) {
-      downvoters.push(userID);
-      setDoc(q, { downVote: downvoters }, { merge: true });
-      // setDisLike(true);
-      // setLike(false);
-    }
   };
-  // old upvoters doc.data.upvoters
 
   let upvoters = [...post.data.upVote];
   const handleUpClick = () => {
-    if (upvoters.includes(userID)) {
-      upvoters = upvoters.filter((ele) => {
-        return ele != userID;
-      });
-      setDoc(q, { upVote: upvoters }, { merge: true });
-      // setLike(false);
-    }
-    if (downvoters.includes(userID)) {
+    if (!upvoters.includes(userID)) {
       downvoters = downvoters.filter((ele) => {
         return ele != userID;
       });
       setDoc(q, { downVote: downvoters }, { merge: true });
+
       upvoters.push(userID);
       setDoc(q, { upVote: upvoters }, { merge: true });
-      // setDisLike(false);
-      // setLike(true);
-    }
-    if (!upvoters.includes(userID)) {
-      upvoters.push(userID);
+    } else {
+      upvoters = upvoters.filter((ele) => {
+        return ele != userID;
+      });
       setDoc(q, { upVote: upvoters }, { merge: true });
-      // setLike(true);
-      // setDisLike(false);
+      downvoters = downvoters.filter((ele) => {
+        return ele != userID;
+      });
+      setDoc(q, { downVote: downvoters }, { merge: true });
     }
-
-    // setDisLike(false);
-    // setLike(true);
-  };
-  //true
-
-  // setCount(count + 1);
-  // setDownIsDisabled(false);
-  // const q = doc(db, "PostList", `${post.id}`);
-
-  // setLike(false);
-  // } else if (downvoters.includes(userID)) {
-  //   downvoters = downvoters.filter((ele) => {
-  //     return ele != userID;
-  //   });
-  //   setDoc(q, { downVote: downvoters }, { merge: true });
-
-  // if (setLike((current) => current) && !upvoters.includes(userID)) {
-  //   //false
-  //   console.log(upvoters);
-
-  //   const q = doc(db, "PostList", `${post.id}`);
-  //   upvoters.push(userID);
-  //   setDoc(q, { upVote: upvoters }, { merge: true });
-  //   setLike((current) => !current);
-  // }
-
-  // setCount(likes + dislikes);
-  // setLike(true) ? setLike(false) : setLike(true);
-  // console.log(userID);
-  // setDisLike(false);
-  // // setCount(count + 1);
-  // setDownIsDisabled(false);
-  // setUpIsDisabled(false);
-  // onAuthStateChanged(auth, (user) => {
-  //   if (user) {
-  // const cityRef = doc(colRef);
-
-  //   const pt = response.docs.map((doc) => ({
-  //     data: doc.data(),
-  //     id: doc.id,
-  // let upvoters = [...post.data.upVote]; // old upvoters doc.data.upvoters
-
-  // if (!upvoters.includes(userID)) {
-  //   const q = doc(db, "PostList", `${post.id}`);
-  //   upvoters.push(userID);
-  //   setDoc(q, { upVote: upvoters }, { merge: true });
-  // } else {
-  //   // upvoters.splice(user.uid);
-  //   // setLike(false);
-
-  //   const q = doc(db, "PostList", `${post.id}`);
-  //   upvoters = upvoters.filter((ele) => {
-  //     return ele != userID;
-  //   });
-
-  //   setDoc(q, { upVote: upvoters }, { merge: true });
-  // }
-  //
-  // }
-
-  // console.log(arrayUnion(post.data.upVote));
-  // console.log(pt);
-  // });
-  // });
-
-  // collection(db, "PostList").doc(snap.id).get();
-  // console.log(snap);
-
-  // const childRef = collection(colRef, `${post.id}`, "upVote");
-
-  // update({ upVote: user.uid });
-  // console.log(childRef);
-  // const updateNote = async (note) => {
-  //   const noteRef = doc(colRef, `${post.id}`, "upVote");
-  //   await update(noteRef, user.uid);
-  // };
-  // updateNote(note);
-
-  // let obj = {
-  //   key: value
-  // }
-  // let clone = {...obj}
-  // clone.key = "bla"
-
-  // const childRef = collection(reqRef, `${post.id}`, "upVote");
-
-  // console.log(childRef);
-  // var childRef = collection(db, "upVote").push(user.uid);
-  // console.log(childRef);
-  // const userLikes = likes.push(user.uid);
-  // setUserLikes(userLikes);
-  // console.log(likes);
-
-  // likes.includes(user.uid) ? likes.splice(user.uid) : "";
-
-  // setCount(userLikes + userDisLikes);
-
-  // useEffect(() => {
-  //   onAuthStateChanged(auth, (user) => {
-  //     // function getPosts() {
-  //     if (user) {
-  //       const querySnapshot = collection(db, "req", { id: doc.id });
-  //       getDoc(querySnapshot)
-  //         .then((response) => {
-  //           const pt = response.docs.map((doc) => ({
-  //             data: doc.data(),
-  //             id: doc.id,
-  //           }));
-  //           console.log(pt);
-  //         })
-  //         .catch((err) => console.log(err.massage));
-  //       // const docRef = doc(db, "req");
-  //       // getDocs(docRef).then((resp) => console.log(resp));
-  //     }
-  //   });
-  // }, []);
-
-  const down = {
-    backgroundColor: disLike ? "#FFA8A8 " : "",
-    borderRadius: disLike ? "50%" : "",
-    width: disLike ? "27px" : "",
-    height: disLike ? "27px" : "",
-  };
-
-  const up = {
-    backgroundColor: like ? "#50FF81 " : "",
-    borderRadius: like ? "50%" : "",
-    width: like ? "27px" : "",
   };
 
   return (
@@ -270,13 +135,11 @@ export default function PostSummary({ post, handleDelete }) {
               <div className="flex ">
                 <div>
                   <button
-                    style={up}
                     className={
                       upvoters.includes(userID)
                         ? "bg-[#50FF81] border rounded-full"
                         : ""
                     }
-                    disabled={upisDisabled}
                     onClick={handleUpClick}
                   >
                     <img
@@ -298,7 +161,6 @@ export default function PostSummary({ post, handleDelete }) {
                         ? "bg-[#FFA8A8] border rounded-full mt-2"
                         : "mt-2"
                     }
-                    disabled={downisDisabled}
                     onClick={handleDownClick}
                   >
                     <img
