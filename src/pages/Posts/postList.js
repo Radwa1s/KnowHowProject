@@ -48,7 +48,7 @@ export default function PostList() {
         // console.log(post);
         return (
           // <Link key={post.id}>
-          <PostSummary post={post} handleDelete={handleDelete} />
+          <PostSummary key={post.id} post={post} handleDelete={handleDelete} />
           // </Link>
         );
       })}

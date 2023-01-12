@@ -6,6 +6,7 @@ import imgRig from "../Group 5.png";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import firebase from "firebase/app";
 import { arrayUnion } from "../../firebase";
+import { getAuth } from "firebase/auth";
 
 import {
   addDoc,
@@ -80,6 +81,11 @@ export default function PostSummary({ post, handleDelete }) {
     isDropdownOpen ? setIsDropdownOpen(false) : setIsDropdownOpen(true);
   };
 
+  // const up = {
+  //   background: like ? "#50FF81" : "",
+  //   borderRadius: like ? "50%" : "",
+  // };
+
   let userID = uid;
   let downvoters = [...post.data.downVote];
   const q = doc(db, "PostList", `${post.id}`);
@@ -114,6 +120,7 @@ export default function PostSummary({ post, handleDelete }) {
 
       upvoters.push(userID);
       setDoc(q, { upVote: upvoters }, { merge: true });
+      // setLike(true);
     } else {
       upvoters = upvoters.filter((ele) => {
         return ele != userID;
@@ -123,8 +130,43 @@ export default function PostSummary({ post, handleDelete }) {
         return ele != userID;
       });
       setDoc(q, { downVote: downvoters }, { merge: true });
+      // setLike(false);
     }
   };
+
+  // useEffect(() => {
+  //   // const docRef = collection(db, "PostList")doc(`${post.id}`);
+  //   const auth = getAuth();
+  //   const user = auth.currentUser.uid;
+  //   // console.log(user);
+  //   onSnapshot(doc(colRef, `${post.id}`), async (snapshot) => {
+  //     const snap = await snapshot;
+  //     let postData;
+  //     let postId;
+  //     let docData = snap.data();
+  //     // console.log(userID);
+  //     if (docData.upVote.includes(user)) {
+  //       console.log(docData.upVote, upvoters);
+
+  //       upvoters.push(user);
+  //     }
+  //     // snap.docChanges().map((doc) => {
+  //     //   if (doc) {
+  //     //     postId = doc.doc.id;
+  //     //     if (postId === `${post.id}`) postData = doc.doc.data();
+  //     //     console.log(postData);
+  //     //     if (postData.upVote.includes(userID)) {
+  //     //       console.log("Aha, upvoter found.");
+  //     //       upvoters.push(userID);
+  //     //     }
+  //     //   }
+  //     // })
+  //     // console.log(await snapshot);
+  //     // if (upvoters.includes(userID)) {
+  //     //   ("bg-[#FFA8A8] border rounded-full mt-2");
+  //     // }
+  //   });
+  // }, []);
 
   return (
     <div className="">
@@ -135,6 +177,8 @@ export default function PostSummary({ post, handleDelete }) {
               <div className="flex ">
                 <div>
                   <button
+                    // style={up}
+                    // className={upV()}
                     className={
                       upvoters.includes(userID)
                         ? "bg-[#50FF81] border rounded-full"
@@ -149,23 +193,27 @@ export default function PostSummary({ post, handleDelete }) {
                   </button>
                   <div>
                     {/* {docs?.map((doc) => ( */}
-                    <h6 className="text-[14px] font-bold text-center">
+                    <h6
+                      className="text-[14px] font-bold text-center mb-1
+                    "
+                    >
                       {upvoters.length - downvoters.length}
                     </h6>
                     {/* // ))} */}
                   </div>
 
                   <button
+                    // style={down}
                     className={
                       downvoters.includes(userID)
-                        ? "bg-[#FFA8A8] border rounded-full mt-2"
-                        : "mt-2"
+                        ? "bg-[#FFA8A8] border rounded-full "
+                        : ""
                     }
                     onClick={handleDownClick}
                   >
                     <img
                       src={downImg}
-                      className="w-[27px] h-[27px] rounded-full  "
+                      className="w-[27px] h-[27px] rounded-full "
                     />
                   </button>
                 </div>
@@ -208,11 +256,11 @@ export default function PostSummary({ post, handleDelete }) {
             onClick={toggleDropdown}
             id="dropdownMenuIconButton"
             data-dropdown-toggle="dropdownDots"
-            class="inline-flex items-center p-2   text-center text-gray-900 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            className="inline-flex items-center p-2   text-center text-gray-900 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
             type="button"
           >
             <svg
-              class="w-5 h-6 "
+              className="w-5 h-6 "
               aria-hidden="true"
               fill="currentColor"
               viewBox="0 0 20 20"
