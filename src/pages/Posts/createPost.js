@@ -83,12 +83,12 @@ function CreatePost() {
     setIsOpen(true);
   };
   const input = {
-    width: isOpen ? "700px" : "",
+    width: isOpen ? "97%" : "",
     height: isOpen ? "150px" : "",
   };
   return (
-    <div className="flex ">
-      <div className="mt-[6px]">
+    <div className="flex">
+      <div className="mt-[6px] ml-[-9px]">
         <button
           id="dropdownUserAvatarButton"
           data-dropdown-toggle="dropdownAvatar"
@@ -104,15 +104,15 @@ function CreatePost() {
         </button>
       </div>
 
-      <form className="add">
-        <div className="w-[200px] mb-[28px] ">
+      <form className="add w-full">
+        <div className=" mb-[28px] w-full ">
           <textarea
             placeholder="Share your experience...."
             name="contant"
             style={input}
             onClick={handleInputStyle}
             required
-            className="bg-whiteGray ml-3 h-[50px] outline-0 outline-none focus:border-white w-[700px] .placeholder-whiteGray .placeholder-font-inter resize-none rounded-md border-gray-200"
+            className="bg-whiteGray  w-[97%] ml-3 h-[50px] outline-0 outline-none focus:border-white  .placeholder-whiteGray .placeholder-font-inter resize-none rounded-md border-gray-200"
           />
           {isOpen ? (
             <div>
@@ -122,7 +122,7 @@ function CreatePost() {
                   setIsOpen(false);
                   handleAddPost();
                 }}
-                className="text-black relative bg-lightGreen w-[100px] font-inter  left-[600px] bottom-[50px]  focus:ring-4 focus:outline-none  font-sm rounded-lg text-sm px-4 py-2 "
+                className="text-black relative bg-lightGreen w-[100px] font-inter  left-[85%] bottom-[50px]  focus:ring-4 focus:outline-none  font-sm rounded-lg text-sm px-4 py-2 "
               >
                 Post
               </button>
@@ -130,7 +130,7 @@ function CreatePost() {
                 onClick={(e) => {
                   setIsOpen(false);
                 }}
-                className="text-black hover:bg-gray-100 relative bg-white border-gray-200 border-2 w-[100px] font-inter  left-[395px] bottom-[50px]  focus:ring-4 focus:outline-none  font-sm rounded-lg text-sm px-4 py-2 "
+                className="text-black hover:bg-gray-100 relative bg-white border-gray-200 border-2 w-[100px] font-inter  left-[60%] bottom-[50px]  focus:ring-4 focus:outline-none  font-sm rounded-lg text-sm px-4 py-2 "
               >
                 Cancel
               </button>

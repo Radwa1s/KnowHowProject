@@ -96,20 +96,20 @@ export default function Navbar() {
       {/* ) : ( */}
       <>
         <ShowOnLogin>
-          <div className="flex mt-8 justify-between ml-[5%]  border-b-[1px] w-[90%] place-items-center mb-[4%] ">
-            <div className=" container flex flex-wrap items-center  mx-auto mb-[2%]">
+          <div className="flex mt-8 justify-between border-b-[1px]   place-items-center mb-[4%] ">
+            <div className=" container flex ml-[5%] items-center mx-auto mb-[2%] w-[60%]">
               <Link to="/" className="  flex items-center ">
                 <img src={logo} />
               </Link>
-              <form className="flex ml-[30px]">
+              <form className="flex ml-[30px] w-[80%]">
                 <input
                   type="search"
                   id="default-search"
-                  className=" p-4 pl-10 w-[400px] h-[40px]  text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className=" p-4 pl-10  h-[40px] w-[50%]  text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="How can I get over..."
                   required
                 />
-                <div className="text-gray relative w-[100px]  right-[80%] mt-[2px]  focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-4 py-2 ">
+                <div className="text-gray relative   right-[50%] mt-[3px] focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-4 py-2 ">
                   <svg
                     aria-hidden="true"
                     className="w-5 h-5 text-gray-500 dark:text-gray-400"
@@ -129,7 +129,7 @@ export default function Navbar() {
               </form>
             </div>
 
-            <div className="flex mt-[-20px] mr-[40px]">
+            <div className="flex mt-[-25px] mr-[12%]">
               <button
                 onClick={toggleDropdown}
                 id="dropdownUserAvatarButton"
@@ -164,7 +164,7 @@ export default function Navbar() {
             </div>
 
             <div className="py-1 block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
-              <NavLink to="/" onClick={LogoutUser}>
+              <NavLink to="/home" onClick={LogoutUser}>
                 Logout
               </NavLink>
             </div>

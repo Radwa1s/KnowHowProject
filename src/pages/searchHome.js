@@ -10,8 +10,12 @@ export default function SearchHome() {
   const [quote, setQuote] = useState("");
 
   const array = [
-    "“If you deliberately plan on being less than you are capable of being,\b then I warn you that you’ll be unhappy for the rest of your life.” –Abraham Maslow",
-    "“We shouldn’t teach great books; we should teach a love of reading.\b  Knowing the contents of a few works of literature is a trivial achievement. Being inclined to go on reading is a great achievement.” –B.F. Skinner",
+    "“For success, attitude is equally as important as ability.” – Harry F. Banks",
+    "“The brain is wider than the sky.” — Emily Dickinso",
+    "“Attitude is a little thing that makes a big difference.” – Winston Churchill",
+    " “Happiness is the only thing that multiplies when you share it.” – Albert Schweitzer",
+    "“Even a happy life cannot be without a measure of darkness, and the word happy would lose its meaning if it were not balanced by sadness.” – Carl G. Jung",
+    "“The power of finding beauty in the humblest things makes home happy and life lovely.” – Louisa May Alcott",
   ];
   const shuffle = useCallback(() => {
     const shuffleArr = Math.floor(Math.random() * array.length);
@@ -19,7 +23,7 @@ export default function SearchHome() {
   });
 
   useEffect(() => {
-    const intervalID = setInterval(shuffle, 2000);
+    const intervalID = setInterval(shuffle, 3000);
     return () => clearInterval(intervalID);
   }, [shuffle]);
 
@@ -33,7 +37,7 @@ export default function SearchHome() {
 
               <ShowOnLogout>
                 <div className="flex items-center justify-center">
-                  <div className=" w-[40%]   h-screen">
+                  <div className=" w-[40%] mr-[50px] ">
                     <h1 className="mt-[10%] text-4xl font-extrabold text-center tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
                       Know How <br />
                       To Get Over Things
@@ -46,7 +50,7 @@ export default function SearchHome() {
                           <button className=" inset-y-0 left-0  pointer-events-none ">
                             <svg
                               aria-hidden="true"
-                              className="w-5 h-5 text-gray-500 dark:text-gray-400 absolute flex items-center ml-[12px] bottom-[13px]"
+                              className="w-5 h-5 text-gray-500 dark:text-gray-400 absolute flex items-center ml-[12px] bottom-[14px]"
                               fill="none"
                               stroke="currentColor"
                               viewBox="0 0 24 24"
@@ -69,7 +73,7 @@ export default function SearchHome() {
                           />
                           <button
                             type="submit"
-                            className="text-black absolute  w-18 text-center right-[35%] bg-lightGreen  top-[10px] mr-[10px]  font-medium rounded-lg text-[12px] h-[35px] p-2 "
+                            className="text-black absolute  w-18 text-center right-[20%] bg-lightGreen  top-[10px] mr-[10px]  font-medium rounded-lg text-[12px] h-[35px] p-2 "
                           >
                             Search
                           </button>
