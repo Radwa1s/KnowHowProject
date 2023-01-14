@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { auth } from "../../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { colRef } from "../../firebase";
-import imgRig from "../Group 5.png";
+import imgRig from "../.././img/Group 5.png";
 import { useDispatch } from "react-redux";
 import { SET_ACTIVE_USER } from "../../redux/slice/authSlice";
 
@@ -24,34 +24,6 @@ export default function UserPostSummary({ post, handleDelete }) {
     isOpen ? setIsOpen(false) : setIsOpen(true);
   };
 
-  //   const updatePost = document.querySelector(".update");
-  //   updatePost.addEventListener("submit", (e) => {
-  //     e.preventDefault();
-  //     const CR = doc(db, "projects", post.Contant);
-  //     setUpdate(CR);
-  //     updateDoc(CR, {
-  //       Contant: update,
-  //     }).then(updatePost.reset());
-  //   });
-  // };
-  // useEffect(() => {
-  //   handleDelete();
-  // });
-
-  // const handleDelete = () => {
-  //   onAuthStateChanged(auth, (user) => {
-  //     if (user) {
-  //       getDocs(colRef).then((response) => {
-  //         const pt = response.docs.filter(() => ({
-  //           id: post.id,
-  //         }));
-  //         const q = query(colRef, where("id", "==", post.id));
-  //         console.log(q);
-  //       });
-  //     }
-  //   }).catch((err) => console.log(err.massage));
-  // };
-  // const user = auth.currentUser;
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       const q = query(colRef, where("AuthorID" == user.uid));
@@ -63,37 +35,11 @@ export default function UserPostSummary({ post, handleDelete }) {
     });
   });
 
-  // })
-  // }
-
-  // }
-  // })
-
-  // const res = querySnapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
-  // console.log(res);
-  // deleteDoc(docRef);
-
-  // deleteDoc(doc(db, "PostList", post));
-
-  // useEffect(() => {
-  //   // function handleDelete() {
-  //   onAuthStateChanged(auth, (user) => {
-  //     if (user) {
-  //       const q = query(colRef, where("id", "==", post.id));
-  //       get(q).then((querySnapshot) => {
-  //         console.log(querySnapshot);
-  //       });
-  //     }
-  //   });
-  //   // }
-  // }, []);
-
   const dispatch = useDispatch();
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setDisplayName(user.displayName);
-        // setDisplayUid(user.uid);
 
         dispatch(
           SET_ACTIVE_USER({

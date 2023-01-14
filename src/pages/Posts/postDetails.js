@@ -6,11 +6,8 @@ import { useParams } from "react-router-dom";
 export default function PostDetails() {
   const { id } = useParams();
   const [post, setPost] = useState([]);
-  // useEffect(() => {
-  //   getPost();
-  // }, []);
+
   useEffect(() => {
-    //  function getPost() {
     const docRef = doc(db, "PostList", id);
     getDoc(docRef).then((resp) => setPost(resp.data()));
     // }

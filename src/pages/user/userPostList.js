@@ -2,18 +2,14 @@ import { getDocs } from "firebase/firestore";
 import UserPostSummary from "./userPostSummary";
 import { where } from "firebase/firestore";
 import { query } from "firebase/firestore";
-import { useParams } from "react-router-dom";
-import { getDoc, doc, deleteDoc } from "firebase/firestore";
-import { db } from "../../firebase";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { doc, deleteDoc } from "firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth";
 import { useState, useEffect } from "react";
 import { colRef } from "../../firebase";
-import { Link } from "react-router-dom";
 import { auth } from "../../firebase";
 
 export default function UserPostList() {
   const [post, setPost] = useState([]);
-  const user = auth.currentUser;
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {

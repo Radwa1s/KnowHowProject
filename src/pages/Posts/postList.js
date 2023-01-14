@@ -2,7 +2,6 @@ import { onAuthStateChanged } from "firebase/auth";
 import { getDocs, collection } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 
-import { Link } from "react-router-dom";
 import { auth, db } from "../../firebase";
 import PostSummary from "./PostSummary";
 import { deleteDoc, doc } from "firebase/firestore";
@@ -10,12 +9,9 @@ import { colRef } from "../../firebase";
 
 export default function PostList() {
   const [post, setPost] = useState([]);
-  // useEffect(() => {
-  //   getPosts();
-  // }, []);
+
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      // function getPosts() {
       if (user) {
         const querySnapshot = collection(db, "PostList");
         getDocs(querySnapshot)

@@ -5,9 +5,8 @@ import { REMOVE_ACTIVE_USER } from "../../redux/slice/authSlice";
 import { useEffect, useState } from "react";
 import { auth } from "../../firebase";
 import { getAuth } from "firebase/auth";
-import imgRig from "../Group 5.png";
-import logo from "../Group.png";
-import { Link } from "react-router-dom";
+import imgRig from "../.././img/Group 5.png";
+
 import UserPostList from "./userPostList";
 import { onAuthStateChanged } from "firebase/auth";
 import Navbar from "../Navbar";
@@ -16,7 +15,6 @@ import CreatePost from "../Posts/createPost";
 export default function Profle() {
   const [displayName, setDisplayName] = useState("");
   const [email, setDisplayEmail] = useState("");
-  // const [uid, setDisplayUid] = useState("");
 
   const dispatch = useDispatch();
   const auth = getAuth();
@@ -26,7 +24,6 @@ export default function Profle() {
       if (user) {
         setDisplayName(user.displayName);
         setDisplayEmail(user.email);
-        // setDisplayUid(user.uid);
 
         dispatch(
           SET_ACTIVE_USER({

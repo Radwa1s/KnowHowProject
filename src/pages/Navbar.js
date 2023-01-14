@@ -10,10 +10,9 @@ import { ShowOnLogout } from "../components/hiddenLinks/hiddenLinks";
 import { useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { getAuth } from "firebase/auth";
-import { Loggedin } from "../App";
-import imgRig from "./Group 5.png";
+import imgRig from ".././img/Group 5.png";
+import logo from ".././img/Logo.svg";
 
-import logo from "./Group.png";
 export default function Navbar() {
   const [displayName, setDisplayName] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -52,7 +51,7 @@ export default function Navbar() {
     signOut(auth)
       .then(() => {
         toast.success("done");
-        navigate("/home");
+        navigate("/");
         window.localStorage.removeItem("Loggedin");
       })
       .catch((error) => {
@@ -64,7 +63,6 @@ export default function Navbar() {
   };
   return (
     <div>
-      {/* {Loggedin ? ( */}
       <>
         <ShowOnLogout>
           <nav className="bg-white  flex justify-between  border-gray-200 px-2  sm:px-4 py-2.5 rounded dark:bg-gray-900">
@@ -93,7 +91,6 @@ export default function Navbar() {
           </nav>
         </ShowOnLogout>
       </>
-      {/* ) : ( */}
       <>
         <ShowOnLogin>
           <div className="flex mt-8 justify-between border-b-[1px]   place-items-center mb-[4%] ">
@@ -164,14 +161,13 @@ export default function Navbar() {
             </div>
 
             <div className="py-1 block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
-              <NavLink to="/home" onClick={LogoutUser}>
+              <NavLink to="/" onClick={LogoutUser}>
                 Logout
               </NavLink>
             </div>
           </div>
         </ShowOnLogin>
       </>
-      {/* )} */}
     </div>
   );
 }

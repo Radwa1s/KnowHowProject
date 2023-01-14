@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import "firebase/auth";
-import { getAuth } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 import { collection } from "firebase/firestore";
@@ -23,13 +23,22 @@ export const db = getFirestore(app);
 export const storage = getStorage(app);
 
 export const colRef = collection(db, "PostList");
-export const arrayUnion = (data) => {
-  db.FieldValue.arrayUnion(data);
-};
+// export const arrayUnion = (data) => {
+//   db.FieldValue.arrayUnion(data);
+// };
 
-const user = auth.currentUser;
+// useEffect(() => {
+//   onAuthStateChanged(auth, (user) => {
+//     if (user) {
+//       const Current = auth.currentUser;
 
-localStorage.setItem("currentUser", JSON.stringify(user));
+//       localStorage.setItem("currentUser", JSON.stringify(Current));
+//       console.log(user);
+//     }
+//   });
+// }, []);
+// localStorage.setItem("currentUser", JSON.stringify(user));
+
 // window.localStorage.getItem("currentUser");
 
 export default app;

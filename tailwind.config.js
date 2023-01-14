@@ -9,7 +9,7 @@ module.exports = {
         whiteGray: "#F9FAFB",
       },
       backgroundImage: {
-        bgImg: "url('/BG.png')",
+        bgImg: "url('../src/img/BG.png')",
       },
     },
   },

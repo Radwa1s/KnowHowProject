@@ -2,10 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import { getAuth } from "firebase/auth";
 const auth = getAuth();
 const user = auth.currentUser;
-// console.log(user);
-// localStorage.setItem(user, JSON.stringify(user));
-// export const userLocalStorage = window.localStorage.setItem("user", user);
-// localStorage.setItem("currentUser", JSON.stringify(user));
 
 const initialState = {
   isLoggedin: false,
@@ -26,16 +22,12 @@ const authSlice = createSlice({
       state.userName = userName;
 
       state.userID = userID;
-      // localStorage.setItem("currentUser", JSON.stringify(state.email));
-      // window.localStorage.setItem("user", state.userName);
-      // window.localStorage.setItem("user", state.userID);
     },
     REMOVE_ACTIVE_USER: (state, action) => {
       state.isLoggedin = false;
       state.email = null;
       state.userName = null;
       state.userID = null;
-      // console.log(state.isLoggedin);
     },
   },
 });
