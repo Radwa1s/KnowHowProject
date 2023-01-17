@@ -21,20 +21,21 @@ function CreatePost() {
     });
   }, []);
 
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      useEffect(() => {
-        handleAddPost();
-      }, []);
-    }
-  });
+  // onAuthStateChanged(auth, (user) => {
+  //   if (user) {
+  //     useEffect(() => {
+  //       handleAddPost();
+  //     }, []);
+  //   }
+  // });
 
   const handleAddPost = () => {
     const addPost = document.querySelector(".add");
 
     const user = auth.currentUser;
-
+    console.log(user);
     addDoc(colRef, {
+      UserName: user.displayName,
       Contant: addPost.contant.value,
       AuthorID: user.uid,
       upVote: [],
@@ -87,24 +88,24 @@ function CreatePost() {
               className="bg-whiteGray  w-[97%] ml-3 h-[50px] outline-0 outline-none focus:border-white  .placeholder-whiteGray .placeholder-font-inter resize-none rounded-md border-gray-200"
             />
             {isOpen ? (
-              <div>
+              <div className="text-center ">
+                <button
+                  onClick={(e) => {
+                    setIsOpen(false);
+                  }}
+                  className="text-black hover:bg-gray-100 relative bg-white  border-gray-200 border-2 left-[35%]  bottom-[67px] w-[12%] font-inter   focus:ring-4 focus:outline-none  font-sm rounded-lg text-sm p-2 pr-[4px] "
+                >
+                  Cancel
+                </button>
                 <button
                   onClick={(e) => {
                     e.preventDefault();
                     setIsOpen(false);
                     handleAddPost();
                   }}
-                  className="text-black relative bg-lightGreen w-[100px] font-inter  left-[85%] bottom-[50px]  focus:ring-4 focus:outline-none  font-sm rounded-lg text-sm px-4 py-2 "
+                  className="text-black relative bg-lightGreen w-[12%] font-inter m-[2%] focus:ring-4 focus:outline-none bottom-[67px]  left-[35%] font-sm rounded-lg text-sm  p-2 "
                 >
                   Post
-                </button>
-                <button
-                  onClick={(e) => {
-                    setIsOpen(false);
-                  }}
-                  className="text-black hover:bg-gray-100 relative bg-white border-gray-200 border-2 w-[100px] font-inter  left-[60%] bottom-[50px]  focus:ring-4 focus:outline-none  font-sm rounded-lg text-sm px-4 py-2 "
-                >
-                  Cancel
                 </button>
               </div>
             ) : (

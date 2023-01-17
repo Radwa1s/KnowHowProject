@@ -27,16 +27,17 @@ export default function PostList() {
     });
   }, []);
 
-  const handleDelete = async (id) => {
-    await deleteDoc(doc(colRef, id));
-  };
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        handleDelete();
-      }
-    });
-  }, []);
+  // const handleDelete = async (id) => {
+  //   await deleteDoc(doc(colRef, id));
+  // };
+
+  // useEffect(() => {
+  //   onAuthStateChanged(auth, (user) => {
+  //     if (user) {
+  //       handleDelete();
+  //     }
+  //   });
+  // }, []);
 
   return (
     <div>
@@ -44,8 +45,9 @@ export default function PostList() {
         // console.log(post);
         return (
           // <Link key={post.id}>
-          <PostSummary key={post.id} post={post} handleDelete={handleDelete} />
+          <PostSummary key={post.id} post={post} />
           // </Link>
+          // handleDelete={handleDelete}
         );
       })}
     </div>

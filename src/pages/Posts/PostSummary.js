@@ -21,8 +21,8 @@ export default function PostSummary({ post, handleDelete }) {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        setDisplayName(user.displayName);
-        setDisplayEmail(user.email);
+        // setDisplayName(user.displayName);
+        // setDisplayEmail(user.email);
         setUserID(user.uid);
 
         dispatch(
@@ -186,7 +186,8 @@ export default function PostSummary({ post, handleDelete }) {
                     </div>
                     <div>
                       <h1 className="ml-[10px] text-[14px] font-bold">
-                        {displayName}
+                        {/* {displayName} */}
+                        {post.data.UserName}
                       </h1>
 
                       <h1 className="text-[11px] ml-[10px]">
@@ -230,14 +231,14 @@ export default function PostSummary({ post, handleDelete }) {
               data-popper-escaped=""
               data-popper-placement="bottom"
             >
-              <button
+              {/* <button
                 className="py-1 block py-2 w-full px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                 onClick={() => {
                   handleDelete(post.id);
                 }}
               >
                 Delete
-              </button>
+              </button> */}
             </div>
           </div>
         </div>

@@ -26,16 +26,17 @@ const Register = () => {
     }
     setIsLoading(true);
 
-    console.log(auth, email, password, userName);
+    // console.log(auth, email, password, userName);
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        const user = auth.currentUser;
+        console.log(user);
+        const user = userCredential.user;
         updateProfile(user, {
           displayName: userName,
         });
 
-        navigate("/profile");
-        window.location.reload();
+        navigate("/");
+        // window.location.reload();
         window.localStorage.setItem("Loggedin", true);
       })
       .catch((error) => {
@@ -208,14 +209,14 @@ const Register = () => {
                     />
                   </div>
                 </div>
-                <Link to="/">
-                  <button
-                    type="submit"
-                    className="w-full text-balck bg-lightGreen hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                  >
-                    Sign up
-                  </button>
-                </Link>
+                {/* <Link to="/"> */}
+                <button
+                  type="submit"
+                  className="w-full text-balck bg-lightGreen hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                >
+                  Sign up
+                </button>
+                {/* </Link> */}
                 <p className="text-sm font-light text-gray-500 dark:text-gray-300">
                   Already have an account?{" "}
                   <Link
