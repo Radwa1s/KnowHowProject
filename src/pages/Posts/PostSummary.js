@@ -21,8 +21,8 @@ export default function PostSummary({ post, handleDelete }) {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        // setDisplayName(user.displayName);
-        // setDisplayEmail(user.email);
+        setDisplayName(user.displayName);
+        setDisplayEmail(user.email);
         setUserID(user.uid);
 
         dispatch(
