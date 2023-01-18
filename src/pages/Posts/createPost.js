@@ -35,7 +35,7 @@ function CreatePost() {
     const user = auth.currentUser;
     console.log(user);
     addDoc(colRef, {
-      UserName: user.displayName,
+      // UserName: user.displayName,
       Contant: addPost.contant.value,
       AuthorID: user.uid,
       upVote: [],

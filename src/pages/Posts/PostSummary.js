@@ -67,6 +67,7 @@ export default function PostSummary({ post, handleDelete }) {
   };
 
   let upvoters = [...post.data.upVote];
+
   const handleUpClick = () => {
     if (!upvoters.includes(userID)) {
       downvoters = downvoters.filter((ele) => {
